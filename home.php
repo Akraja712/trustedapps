@@ -31,7 +31,7 @@ include "header.php";
 
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-    <title>Pocket Farm- Dashboard</title>
+    <title>Trusted Apps- Dashboard</title>
 </head>
 
 <body>
