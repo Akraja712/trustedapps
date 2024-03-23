@@ -68,7 +68,7 @@ if (isset($_POST['btnAdd'])) {
                                     <script type="text/javascript">
                                        CKEDITOR.replace('main_content');
                                     </script>
-                                </div>
+                                  </div>
                                 </div>  
                             </div>
                         <br>

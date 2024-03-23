@@ -890,5 +890,73 @@ if (isset($_GET['table']) && $_GET['table'] == 'hour_withdrawal') {
     $bulkData['rows'] = $rows;
     echo json_encode($bulkData);
 }
+
+//apps
+if (isset($_GET['table']) && $_GET['table'] == 'apps') {
+
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($_GET['offset']);
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
+
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search = $db->escapeString($_GET['search']);
+            $where .= "WHERE id name '%" . $search . "%' OR mobile like '%" . $search . "%' OR otp like '%" . $search . "%'";
+        }
+    if (isset($_GET['sort'])){
+        $sort = $db->escapeString($_GET['sort']);
+    }
+    if (isset($_GET['order'])){
+        $order = $db->escapeString($_GET['order']);
+    }
+    $sql = "SELECT COUNT(`id`) as total FROM `apps` ";
+    $db->sql($sql);
+    $res = $db->getResult();
+    foreach ($res as $row)
+        $total = $row['total'];
+   
+    $sql = "SELECT * FROM apps " . $where . " ORDER BY " . $sort . " " . $order . " LIMIT " . $offset . ", " . $limit;
+    $db->sql($sql);
+    $res = $db->getResult();
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
+    
+    $rows = array();
+    $tempRow = array();
+
+    foreach ($res as $row) {
+
+        
+        $operate = ' <a href="edit-apps.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
+        $operate .= ' <a class="text text-danger" href="delete-apps.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $tempRow['id'] = $row['id'];
+        $tempRow['name'] = $row['name'];
+        if (!empty($row['logo'])) {
+            $tempRow['logo'] = "<a data-lightbox='category' href='" . $row['logo'] . "' data-caption='" . $row['logo'] . "'><img src='" . $row['logo'] . "' title='" . $row['logo'] . "' height='50' /></a>";
+        } else {
+            $tempRow['logo'] = 'No Image';
+        }
+        if (!empty($row['screenshot'])) {
+            $tempRow['screenshot'] = "<a data-lightbox='category' href='" . $row['screenshot'] . "' data-caption='" . $row['screenshot'] . "'><img src='" . $row['screenshot'] . "' title='" . $row['screenshot'] . "' height='50' /></a>";
+        } else {
+            $tempRow['screenshot'] = 'No Image';
+        }
+        $tempRow['plan_details'] = $row['plan_details'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
 $db->disconnect();
 

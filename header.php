@@ -248,6 +248,12 @@ $fn = new custom_functions;
                         <span>Hour Withdrawal Reports</span>
                     </a>
                 </li>
+                <li class="treeview">
+                    <a href="apps.php">
+                        <i class="fa fa-adn"></i>
+                        <span>Apps</span>
+                    </a>
+                </li>
             </section>
             <!-- /.sidebar -->
         </aside>
