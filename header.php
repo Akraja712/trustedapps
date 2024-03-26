@@ -165,7 +165,7 @@ $fn = new custom_functions;
                     </a>
                 </li>
               
-                <li class="treeview">
+               <!-- <li class="treeview">
                     <a href="users.php">
                     <i class="fa fa-users"></i>
                         <span>Users</span>
@@ -247,7 +247,7 @@ $fn = new custom_functions;
                         <i class="fa fa-adn"></i>
                         <span>Hour Withdrawal Reports</span>
                     </a>
-                </li>
+                </li>-->
                 <li class="treeview">
                     <a href="apps.php">
                         <i class="fa fa-adn"></i>

@@ -46,7 +46,7 @@ include "header.php";
                 </li>
             </ol>
         </section>
-        <section class="content">
+        <!--<section class="content">
             <div class="row">
                 <div class="col-lg-4 col-xs-6">
                     <div class="small-box bg-aqua">
@@ -182,7 +182,7 @@ include "header.php";
                     </div>
                 </div>
              </div>
-        </section>
+        </section>-->
     </div>
     <?php include "footer.php"; ?>
 </body>
