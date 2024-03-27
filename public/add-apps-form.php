@@ -7,6 +7,7 @@ $fn = new custom_functions;
 if (isset($_POST['btnAdd'])) {
     $name = $db->escapeString($_POST['name']);
     $plan_details = $db->escapeString($_POST['plan_details']);
+    $refer_link = $db->escapeString($_POST['refer_link']);
 
     if (empty($name)) {
         $error['name'] = " <span class='label label-danger'>Required!</span>";
@@ -51,11 +52,11 @@ if (isset($_POST['btnAdd'])) {
         $upload_logo = 'upload/images/' . $logo_filename;
         $upload_screenshot = 'upload/images/' . $screenshot_filename;
 
-        $sql = "INSERT INTO apps (name, logo, screenshot, plan_details) VALUES ('$name', '$upload_logo', '$upload_screenshot', '$plan_details')";
+        $sql = "INSERT INTO apps (name, logo, screenshot, plan_details,refer_link) VALUES ('$name', '$upload_logo', '$upload_screenshot', '$plan_details','$refer_link')";
         $db->sql($sql);
     } else {
         // Image(s) not uploaded or empty, insert only the name
-        $sql = "INSERT INTO apps (name, plan_details) VALUES ('$name', '$plan_details')";
+        $sql = "INSERT INTO apps (name, plan_details,refer_link) VALUES ('$name', '$plan_details','$refer_link')";
         $db->sql($sql);
     }
 
@@ -101,6 +102,10 @@ if (isset($_POST['btnAdd'])) {
                                     <div class='col-md-6'>
                                         <label for="exampleInputEmail1">Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
                                         <input type="text" class="form-control" name="name" id="name" required>
+                                    </div>
+                                    <div class='col-md-6'>
+                                        <label for="exampleInputEmail1">Refer Link</label> <i class="text-danger asterik">*</i><?php echo isset($error['refer_link']) ? $error['refer_link'] : ''; ?>
+                                        <input type="text" class="form-control" name="refer_link" id="refer_link" required>
                                     </div>
                                 </div>
                             </div>

@@ -15,7 +15,9 @@ if (isset($_GET['id'])) {
 if (isset($_POST['btnUpdate'])) {
     $name = $db->escapeString($fn->xss_clean($_POST['name']));
     $plan_details = $db->escapeString($fn->xss_clean($_POST['plan_details']));
-    $sql = "UPDATE apps SET name='$name', plan_details='$plan_details' WHERE id = '$ID'";
+    $refer_link = $db->escapeString($fn->xss_clean($_POST['refer_link']));
+
+    $sql = "UPDATE apps SET name='$name', plan_details='$plan_details', refer_link='$refer_link' WHERE id = '$ID'";
     $db->sql($sql);
     $result = $db->getResult();
     if (!empty($result)) {
@@ -104,6 +106,10 @@ $res = $db->getResult();
                                     <label for="exampleInputEmail1"> Name</label> <i class="text-danger asterik">*</i><?php echo isset($error['name']) ? $error['name'] : ''; ?>
                                     <input type="text" class="form-control" name="name" value="<?php echo $res[0]['name']?>">
                                 </div>
+                                <div class='col-md-6'>
+                                    <label for="exampleInputEmail1">Refer Link</label> <i class="text-danger asterik">*</i><?php echo isset($error['refer_link']) ? $error['refer_link'] : ''; ?>
+                                    <input type="text" class="form-control" name="refer_link" value="<?php echo $res[0]['refer_link']?>">
+                                </div>
                             </div>
                         </div>
                         <br>
@@ -111,12 +117,12 @@ $res = $db->getResult();
                             <div class="form-group">
                                 <div class="col-md-6">
                                     <label for="exampleInputFile">Logo</label> <i class="text-danger asterik">*</i><?php echo isset($error['logo']) ? $error['logo'] : ''; ?>
-                                    <input type="file" name="logo" onchange="readURL(this, 'logo');" accept="image/png,  image/jpeg" id="logo" required/><br>
+                                    <input type="file" name="logo" onchange="readURL(this, 'logo');" accept="image/png,  image/jpeg" id="logo"/><br>
                                     <img id="logo_preview" src="<?php echo $res[0]['logo']; ?>" alt="" width="150" height="200" <?php echo empty($res[0]['logo']) ? 'style="display: none;"' : ''; ?> />
                                 </div>
                                 <div class="col-md-6">
                                     <label for="exampleInputFile">Screenshot</label> <i class="text-danger asterik">*</i><?php echo isset($error['screenshot']) ? $error['screenshot'] : ''; ?>
-                                    <input type="file" name="screenshot" onchange="readURL(this, 'screenshot');" accept="image/png,  image/jpeg" id="screenshot" required/><br>
+                                    <input type="file" name="screenshot" onchange="readURL(this, 'screenshot');" accept="image/png,  image/jpeg" id="screenshot"/><br>
                                     <img id="screenshot_preview" src="<?php echo $res[0]['screenshot']; ?>" alt="" width="150" height="200" <?php echo empty($res[0]['screenshot']) ? 'style="display: none;"' : ''; ?> />
                                 </div>
                             </div>
