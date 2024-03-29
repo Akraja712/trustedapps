@@ -42,7 +42,7 @@ $res = $db->getResult();
 $num = $db->numRows($res);
 
 if ($num >= 1) {
-    $sql = "UPDATE users SET `name`='$name', `profile`='$profile' WHERE email='$email'";
+    $sql = "UPDATE users SET `name`='$name', `profile`='$profile',`registered_datetime`='$datetime' WHERE email='$email'";
     $db->sql($sql);
     
     $sql = "SELECT * FROM users WHERE email = '$email'";
