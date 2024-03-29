@@ -987,7 +987,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'ratings') {
             $search = $db->escapeString($_GET['search']);
             $where .= " AND (l.id LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%' OR a.name LIKE '%" . $search . "%'  OR u.mobile LIKE '%" . $search . "%')";
         }
-        $join = "LEFT JOIN `users` u ON l.user_id = u.id LEFT JOIN `apps` a ON l.apps_id = a.id WHERE l.id IS NOT NULL " . $where;
+        $join = "LEFT JOIN `users` u ON l.user_id = u.id LEFT JOIN `apps` a ON l.app_id = a.id WHERE l.id IS NOT NULL " . $where;
 
         $sql = "SELECT COUNT(l.id) AS total FROM `ratings` l " . $join;
         $db->sql($sql);
@@ -996,7 +996,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'ratings') {
             $total = $row['total'];
         }
         
-        $sql = "SELECT l.id AS id, l.*, u.name AS user_name, u.mobile AS user_mobile, a.name AS apps_name FROM `ratings` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+        $sql = "SELECT l.id AS id, l.*, u.name AS user_name, u.mobile AS user_mobile, a.name AS app_name FROM `ratings` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
         $db->sql($sql);
         $res = $db->getResult();
         
@@ -1014,7 +1014,7 @@ if (isset($_GET['table']) && $_GET['table'] == 'ratings') {
         $tempRow['id'] = $row['id'];
         $tempRow['user_name'] = $row['user_name'];
         $tempRow['user_mobile'] = $row['user_mobile'];
-        $tempRow['apps_name'] = $row['apps_name'];
+        $tempRow['app_name'] = $row['app_name'];
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }

@@ -38,7 +38,7 @@
                                     <th  data-field="id" data-sortable="true">ID</th>
                                     <th data-field="user_name" data-sortable="true">User Name</th>
                                     <th data-field="user_mobile" data-sortable="true">User Mobile</th>
-                                    <th data-field="apps_name" data-sortable="true">Apps Name</th>
+                                    <th data-field="app_name" data-sortable="true">App Name</th>
                                     <th  data-field="operate" data-events="actionEvents">Action</th>
                                 </tr>
                             </thead>
