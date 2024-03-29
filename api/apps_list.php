@@ -22,6 +22,8 @@ if ($num >= 1){
     foreach ($res as $row) {
         $temp['id'] = $row['id'];
         $temp['name'] = $row['name'];
+        $temp['ratings'] = $row['ratings'];
+        $temp['rate_count'] = $row['rate_count'];
         $temp['logo'] = DOMAIN_URL . $row['logo'];
         $temp['screenshot'] = DOMAIN_URL . $row['screenshot'];
         $temp['plan_details'] = $row['plan_details'];

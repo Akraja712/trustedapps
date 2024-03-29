@@ -87,6 +87,7 @@ $fn = new custom_functions;
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.1/jquery.fancybox.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.4.1/jquery.fancybox.min.js"></script>
+    
 
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
@@ -252,6 +253,12 @@ $fn = new custom_functions;
                     <a href="apps.php">
                         <i class="fa fa-adn"></i>
                         <span>Apps</span>
+                    </a>
+                </li>
+                <li class="treeview">
+                    <a href="ratings.php">
+                        <i class="fa fa-bar-chart"></i>
+                        <span>Ratings</span>
                     </a>
                 </li>
             </section>

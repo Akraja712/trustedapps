@@ -200,7 +200,7 @@ if (isset($_POST['btnCancel'])) { ?>
                                     <input type="checkbox" id="withdrawal_button" class="js-switch" <?= isset($res[0]['withdrawal_status']) && $res[0]['withdrawal_status'] == 1 ? 'checked' : '' ?>>
                                     <input type="hidden" id="withdrawal_status" name="withdrawal_status" value="<?= isset($res[0]['withdrawal_status']) && $res[0]['withdrawal_status'] == 1 ? 1 : 0 ?>">
                                 </div>
-                            <div class="col-md-3">
+                                <div class="col-md-3">
                                 <label for="exampleInputEmail1">Recharge </label><i class="text-danger asterik">*</i>
                                     <input type="number" class="form-control" name="recharge" value="<?php echo $res[0]['recharge']; ?>">
                                 </div>

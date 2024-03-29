@@ -941,6 +941,8 @@ if (isset($_GET['table']) && $_GET['table'] == 'apps') {
         $operate .= ' <a class="text text-danger" href="delete-apps.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
         $tempRow['id'] = $row['id'];
         $tempRow['name'] = $row['name'];
+        $tempRow['ratings'] = $row['ratings'];
+        $tempRow['rate_count'] = $row['rate_count'];
         if (!empty($row['logo'])) {
             $tempRow['logo'] = "<a data-lightbox='category' href='" . $row['logo'] . "' data-caption='" . $row['logo'] . "'><img src='" . $row['logo'] . "' title='" . $row['logo'] . "' height='50' /></a>";
         } else {
@@ -952,6 +954,67 @@ if (isset($_GET['table']) && $_GET['table'] == 'apps') {
             $tempRow['screenshot'] = 'No Image';
         }
         $tempRow['plan_details'] = $row['plan_details'];
+        $tempRow['operate'] = $operate;
+        $rows[] = $tempRow;
+    }
+    $bulkData['rows'] = $rows;
+    print_r(json_encode($bulkData));
+}
+//ratings
+if (isset($_GET['table']) && $_GET['table'] == 'ratings') {
+
+    $offset = 0;
+    $limit = 10;
+    $where = '';
+    $sort = 'id';
+    $order = 'DESC';
+
+    if (isset($_GET['apps']) && $_GET['apps'] != '') {
+        $apps = $db->escapeString($fn->xss_clean($_GET['apps']));
+        $where .= " AND a.name = '$apps'";
+    }
+
+    if (isset($_GET['offset']))
+        $offset = $db->escapeString($_GET['offset']);
+    if (isset($_GET['limit']))
+        $limit = $db->escapeString($_GET['limit']);
+    if (isset($_GET['sort']))
+        $sort = $db->escapeString($_GET['sort']);
+    if (isset($_GET['order']))
+        $order = $db->escapeString($_GET['order']);
+
+        if (isset($_GET['search']) && !empty($_GET['search'])) {
+            $search = $db->escapeString($_GET['search']);
+            $where .= " AND (l.id LIKE '%" . $search . "%' OR u.name LIKE '%" . $search . "%' OR a.name LIKE '%" . $search . "%'  OR u.mobile LIKE '%" . $search . "%')";
+        }
+        $join = "LEFT JOIN `users` u ON l.user_id = u.id LEFT JOIN `apps` a ON l.apps_id = a.id WHERE l.id IS NOT NULL " . $where;
+
+        $sql = "SELECT COUNT(l.id) AS total FROM `ratings` l " . $join;
+        $db->sql($sql);
+        $res = $db->getResult();
+        foreach ($res as $row) {
+            $total = $row['total'];
+        }
+        
+        $sql = "SELECT l.id AS id, l.*, u.name AS user_name, u.mobile AS user_mobile, a.name AS apps_name FROM `ratings` l " . $join . " ORDER BY $sort $order LIMIT $offset, $limit";
+        $db->sql($sql);
+        $res = $db->getResult();
+        
+
+    $bulkData = array();
+    $bulkData['total'] = $total;
+    $rows = array();
+    $tempRow = array();
+    foreach ($res as $row) {
+
+
+        
+        //$operate = ' <a href="edit-user_plan.php?id=' . $row['id'] . '"><i class="fa fa-edit"></i>Edit</a>';
+        $operate = ' <a class="text text-danger" href="delete-ratings.php?id=' . $row['id'] . '"><i class="fa fa-trash"></i>Delete</a>';
+        $tempRow['id'] = $row['id'];
+        $tempRow['user_name'] = $row['user_name'];
+        $tempRow['user_mobile'] = $row['user_mobile'];
+        $tempRow['apps_name'] = $row['apps_name'];
         $tempRow['operate'] = $operate;
         $rows[] = $tempRow;
     }

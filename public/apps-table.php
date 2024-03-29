@@ -26,6 +26,8 @@
                                     <th data-field="name" data-sortable="true">Name</th>
                                     <th data-field="logo">Logo</th>
                                     <th data-field="screenshot">Screenshot</th>
+                                    <th data-field="ratings" data-sortable="true">Ratings</th>
+                                    <th data-field="rate_count" data-sortable="true">Rate Count</th>
                                     <th data-field="plan_details" data-sortable="true">Plan Details</th>
                                     <th  data-field="operate" data-events="actionEvents">Action</th>
                                 </tr>
