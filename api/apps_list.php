@@ -24,6 +24,7 @@ if ($num >= 1){
         $temp['name'] = $row['name'];
         $temp['ratings'] = $row['ratings'];
         $temp['rate_count'] = $row['rate_count'];
+        $temp['refer_link'] = $row['refer_link'];
         $temp['logo'] = DOMAIN_URL . $row['logo'];
         $temp['screenshot'] = DOMAIN_URL . $row['screenshot'];
         $temp['plan_details'] = $row['plan_details'];
