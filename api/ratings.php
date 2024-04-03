@@ -71,6 +71,16 @@ if (empty($apps)) {
     print_r(json_encode($response));
     return false;
 }
+$sql_check = "SELECT * FROM ratings WHERE user_id = $user_id AND app_id = $app_id";
+$db->sql($sql_check);
+$res_check_user = $db->getResult();
+
+if (!empty($res_check_user)) {
+    $response['success'] = false;
+    $response['message'] = "User Already Give their Ratings For this App";
+    print_r(json_encode($response));
+    return false;
+}
 
 $sql = "SELECT * FROM users WHERE id=" . $user_id;
 $db->sql($sql);
