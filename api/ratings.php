@@ -93,6 +93,10 @@ if ($num == 1) {
 
     $sql = "UPDATE users SET ratings='$ratings',comments='$comments'  WHERE id=" . $user_id;
     $db->sql($sql);
+
+    $sql = "UPDATE apps SET ratings='$ratings'+ratings  WHERE id=" . $app_id;
+    $db->sql($sql);
+
     $response['success'] = true;
     $response['message'] = "Updated Successfully";
     print_r(json_encode($response));
