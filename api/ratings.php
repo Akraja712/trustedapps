@@ -77,6 +77,10 @@ $db->sql($sql);
 $res = $db->getResult();
 $num = $db->numRows($res);
 if ($num == 1) {
+
+    $sql = "INSERT INTO ratings (user_id, app_id) VALUES ('$user_id','$app_id')";
+    $db->sql($sql);
+
     $sql = "UPDATE users SET ratings='$ratings',comments='$comments'  WHERE id=" . $user_id;
     $db->sql($sql);
     $response['success'] = true;
