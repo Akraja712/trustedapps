@@ -12,7 +12,7 @@ include_once('../includes/crud.php');
 $db = new Database();
 $db->connect();
 
-$sql = "SELECT r.id, r.user_id, u.name AS name,u.mobile AS mobile,u.ratings AS user_ratings,u.comments AS comments,u.profile AS profile ,r.app_id, a.name AS app_name,a.ratings AS app_ratings,a.logo AS app_logo,a.refer_link AS app_refer_link
+$sql = "SELECT r.id, r.user_id, u.name AS name,u.mobile AS mobile,u.ratings AS user_ratings,u.comments AS comments,u.profile AS profile ,r.app_id, a.name AS app_name,a.ratings AS app_ratings,a.logo AS app_logo,a.refer_link AS app_refer_link,a.screenshot AS app_screenshot
         FROM ratings r
         INNER JOIN users u ON r.user_id = u.id
         INNER JOIN apps a ON r.app_id = a.id
@@ -34,6 +34,7 @@ if ($num >= 1){
         $temp['app_name'] = $row['app_name'];
         $temp['app_ratings'] = $row['app_ratings'];
         $temp['app_logo'] = DOMAIN_URL . $row['app_logo'];
+        $temp['app_screenshot'] = DOMAIN_URL . $row['app_screenshot'];
         $temp['app_refer_link'] = $row['app_refer_link'];
         $rows[] = $temp;
     }
