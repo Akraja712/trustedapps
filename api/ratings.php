@@ -71,6 +71,9 @@ if (empty($apps)) {
     print_r(json_encode($response));
     return false;
 }
+$rate_count = $apps[0]['rate_count'];
+
+
 $sql_check = "SELECT * FROM ratings WHERE user_id = $user_id AND app_id = $app_id";
 $db->sql($sql_check);
 $res_check_user = $db->getResult();
@@ -91,16 +94,21 @@ if ($num == 1) {
     $sql = "INSERT INTO ratings (user_id, app_id) VALUES ('$user_id','$app_id')";
     $db->sql($sql);
 
-    $sql = "UPDATE users SET ratings='$ratings',comments='$comments'  WHERE id=" . $user_id;
+    $sql = "UPDATE users SET user_ratings='$ratings',comments='$comments'  WHERE id=" . $user_id;
     $db->sql($sql);
 
-    $sql = "UPDATE apps SET ratings='$ratings'+ratings  WHERE id=" . $app_id;
+
+    $sql = "SELECT * FROM ratings SET  WHERE app_id = $app_id";
+    $db->sql($sql);
+    $res = $db->getResult();
+
+    $sql = "UPDATE apps SET rate_count = $rate_count + 1 , ratings = '$avg_ratings' WHERE id=" . $app_id;
     $db->sql($sql);
 
     $response['success'] = true;
     $response['message'] = "Updated Successfully";
     print_r(json_encode($response));
-    return false;
+    return false;   
 }
 else {
     $response['success'] = false;
